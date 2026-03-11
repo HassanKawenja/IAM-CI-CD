@@ -1,0 +1,31 @@
+name: Deploy IAM Role
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::<ACCOUNT-ID>:role/GitHubCICDRole
+          aws-region: us-east-1
+
+      - name: Deploy CloudFormation
+        run: |
+          aws cloudformation deploy \
+            --template-file infra/iam-role.yml \
+            --stack-name iam-cicd-stack \
+            --capabilities CAPABILITY_NAMED_IAM
