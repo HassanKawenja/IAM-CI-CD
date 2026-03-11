@@ -26,6 +26,6 @@ jobs:
       - name: Deploy CloudFormation
         run: |
           aws cloudformation deploy \
-            --template-file infra/iam-role.yml \
+            --template-file infrastructure/iam-role.yml \
             --stack-name iam-cicd-stack \
             --capabilities CAPABILITY_NAMED_IAM
