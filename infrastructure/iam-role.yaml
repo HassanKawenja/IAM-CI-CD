@@ -5,7 +5,7 @@ Resources:
   MyCICDRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: MyCICDDeployedRole
+      RoleName: MyCICDDeploymentRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
